@@ -21,7 +21,7 @@ apps name is `todo`. Clone this template in the root folder of your app using `d
 
 ```
 cd apps/todo
-npx degit NagariaHussain/doppio_intrakoreui_starter frontend
+npx degit intrakore/intrakoreui_starter frontend
 cd frontend
 yarn
 yarn dev
