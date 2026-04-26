@@ -1,9 +1,11 @@
-import path from "node:path"
-import vue from "@vitejs/plugin-vue"
-import intrakoreui from "intrakore-ui/vite"
-import { defineConfig } from "vite"
+import path from 'path';
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import intrakoreui from 'intrakore-ui/vite';
 
-const appName = path.basename(path.resolve(__dirname, "../.."))
+// Get dynamic app and spa names from the directory structure
+const appName = path.basename(path.resolve(__dirname, '../..'));
+const spaName = path.basename(__dirname);
 
 export default defineConfig({
   plugins: [
@@ -12,38 +14,25 @@ export default defineConfig({
       jinjaBootData: true,
       lucideIcons: true,
       buildConfig: {
-        outDir: `../${appName}/public/frontend`,
-        indexHtmlPath: `../${appName}/www/frontend.html`,
+        outDir: `../${appName}/public/${spaName}`,
+        indexHtmlPath: `../${appName}/www/${spaName}.html`,
         emptyOutDir: true,
         sourcemap: true,
       },
     }),
     vue(),
   ],
-  build: {
-    chunkSizeWarningLimit: 1500,
-    outDir: `../${appName}/public/frontend`,
-    emptyOutDir: true,
-    target: "es2015",
-    sourcemap: true,
-  },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
-      "tailwind.config.js": path.resolve(__dirname, "tailwind.config.js"),
+      '@': path.resolve(__dirname, 'src'),
     },
   },
+  build: {
+    outDir: `../${appName}/public/${spaName}`,
+    emptyOutDir: true,
+    target: 'es2015',
+  },
   optimizeDeps: {
-    include: ["feather-icons", "showdown", "highlight.js/lib/core", "interactjs"],
+    include: ['intrakore-ui > feather-icons', 'showdown', 'engine.io-client'],
   },
-  server: {
-    port: 8080,
-    allowedHosts: true,
-    proxy: {
-      '^/(app|api|assets|files|private)': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-      }
-    }
-  },
-})
+});
