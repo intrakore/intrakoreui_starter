@@ -1,2 +1,3 @@
 @import "./assets/Inter/inter.css";
 @import "intrakore-ui/src/style.css";
+@import 'intrakore-ui/tokens.css';
