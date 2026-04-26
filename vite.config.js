@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import intrakoreui from 'intrakore-ui/vite';
 
-// Get dynamic app and spa names from the directory structure
+// Auto-detect app and spa names from directory structure
 const appName = path.basename(path.resolve(__dirname, '../..'));
 const spaName = path.basename(__dirname);
 
